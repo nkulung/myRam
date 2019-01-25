@@ -5,5 +5,6 @@ Uses Selenium with the PhantomJS Headless WebDriver and BeautifulSoup to parse h
  2. Asks for ecampus username and sakai password
  3. Lands on page and takes a screenshot of DOM and saves to .png file.
 
+![balance.png](https://github.com/nkulung/myRam/blob/master/Balance.png?raw=true)
 
 Future features include: email notifications, non-selenium web scrapping, and scheduled balance emails.
