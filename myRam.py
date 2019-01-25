@@ -1,10 +1,14 @@
 import requests
 import urllib3
 import smtplib
+import time
 from email.mime.text import MIMEText
 from selenium import webdriver
 from bs4 import BeautifulSoup as bs
 from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.common.by import By
 
 
 def getEmailLogin():
@@ -18,7 +22,8 @@ def getEmailLogin():
 
 def getLoginPage():
 
-    driver = webdriver.Firefox()
+    driver = webdriver.PhantomJS()
+    driver.set_window_size(1000, 1400) 
     driver.get("https://get.cbord.com/portal/full/portal.php")
     html = driver.page_source
 
@@ -49,12 +54,17 @@ def selectSchool(driver):
     pw.send_keys(password)
     driver.find_element_by_id('login_submit').click()
     
-def sendInfo(driver):
-    
+
+def getScreenshot(driver):
+    WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.ID,'get_funds_overview')))
+    time.sleep(4)                            
+    driver.save_screenshot('Balance.png');
+    print("Image saved successfully")
 
 def main():
     driver = getLoginPage()
     selectSchool(driver)
+    getScreenshot(driver)
 
 
 
